@@ -1,5 +1,6 @@
 import React from 'react';
 import { CheckCircle, Rocket, Layout, Smartphone } from 'lucide-react';
+import Link from 'next/link';
 
 export default function LandingPage(){
   return (
@@ -9,9 +10,11 @@ export default function LandingPage(){
         <div className="text-xl font-bold text-black-700 flex items-center gap-2">
           <Rocket size={24} /> prodManX
         </div>
-        <button className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition">
-          Get Started
-        </button>
+        <Link href="/login">
+          <button className="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition">
+            Login
+          </button>
+        </Link>
       </nav>
 
       <header className="px-6 py-16 md:py-24 text-center max-w-4xl mx-auto">
