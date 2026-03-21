@@ -1,9 +1,9 @@
 'use client';
 
 import { createContext, useState, useEffect } from "react";
-import { client } from "@supabase/supabase-js";
+import { client } from "@/utils/supabase/client";
 
-const Authorization = createContext(null);
+const AuthContext = createContext(null);
 
 const AuthProvider = ({children}) => {
     
@@ -15,5 +15,17 @@ const AuthProvider = ({children}) => {
             setUser(data?.session?.user || null)
             setLoading(false);
         });
+
+        const {data, listener } = client.auth.onAuthStatechange((e, session)=>{
+            setUser(session?.user || null);
+        });
+
+        return () =>{
+            listener.subscribe.unsubscribe();
+        };
     }, []);
+
+    return <AuthContext.Provider value={{user, loading}}>{children}</AuthContext.Provider>
 }
+
+export { AuthProvider, AuthContext}
